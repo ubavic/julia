@@ -163,7 +163,7 @@ Palette file should be a plain text file with a list of colors written in `#RRGG
 
 ## Credits
 
-The author of this program is [Nikola Ubavić](http://alas.matf.bg.ac.rs/~mm16310/index_en.html).
+The author of this program is [Nikola Ubavić](https://ubavic.rs/?lang=en).
 
 ## License
 
