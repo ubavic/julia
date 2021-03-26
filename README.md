@@ -154,13 +154,19 @@ Palette file should be a plain text file with a list of colors written in `#RRGG
 ./julia -f 0 -b 200 -i 100 -d 1000:600 -r 2 -p palette/blue_yellow -z 1.4
 ``
 
+<img src="img/example1.bmp">
+
 ``
 ./julia -a 1 -j -0.5:0.35 -i 50 -d 1000:600 -z 1.4
 ``
 
+<img src="img/example2.bmp">
+
 ``
 ./julia -j -0.2:0.3 -r 4:4 -i 50 -b 200 -k 5
 ``
+
+<img src="img/example3.bmp">
 
 ## Credits
 
