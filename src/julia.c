@@ -7,6 +7,10 @@
 int SetImageFractal();
 void SetDefaults();
 
+extern struct Image outputImage;
+extern struct Palette mainPalette;
+extern struct Fractal fractal;
+
 int main (int argc, char** argv)
 {
     SetDefaults ();

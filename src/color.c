@@ -1,6 +1,10 @@
 #include "color.h"
 #include "image.h"
 
+extern struct Image inputImage;
+extern struct Palette mainPalette;
+extern struct Fractal fractal;
+
 void GetInside (unsigned int i, struct Color *color)
 {
     *color = mainPalette.insideColor;

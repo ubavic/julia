@@ -57,10 +57,7 @@ struct Fractal {
     char fastBreak;
 };
 
-struct Image outputImage;
-struct Image inputImage;
-struct Palette mainPalette;
-struct Fractal fractal;
+
 
 static struct Color defaultInside = {0x00, 0x00, 0x00};
 

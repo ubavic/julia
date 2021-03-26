@@ -3,6 +3,10 @@
 #include "global.h"
 #include "color.h"
 
+extern struct Image outputImage;
+extern struct Palette mainPalette;
+extern struct Fractal fractal;
+
 char *plane;
 int exponent;
 

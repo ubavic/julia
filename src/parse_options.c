@@ -5,6 +5,9 @@
 #include "global.h"
 #include "color.h"
 
+extern struct Image outputImage;
+extern struct Image inputImage;
+extern struct Fractal fractal;
 
 int Parse (int argc, char** argv)
 {

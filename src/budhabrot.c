@@ -4,6 +4,9 @@
 #include "global.h"
 #include "color.h"
 
+extern struct Image outputImage;
+extern struct Fractal fractal;
+
 unsigned int findCycle (unsigned int iterations)
 {
     for (int i = iterations-2; i > 0; i--){

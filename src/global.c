@@ -1,5 +1,10 @@
 #include "global.h"
 
+struct Image outputImage;
+struct Image inputImage;
+struct Palette mainPalette;
+struct Fractal fractal;
+
 double getRandom()
 {
     return (double)rand()/(double)(RAND_MAX);

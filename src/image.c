@@ -1,6 +1,9 @@
 #include "image.h"
 #include "global.h"
 
+extern struct Image outputImage;
+extern struct Fractal fractal;
+
 static unsigned char zeros [3] = {0x00, 0x00, 0x00};
 
 unsigned char BMPheader [54] = {

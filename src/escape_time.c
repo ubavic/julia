@@ -6,6 +6,10 @@
 #include "color.h"
 #include "escape_time.h"
 
+extern struct Image outputImage;
+extern struct Image inputImage;
+extern struct Fractal fractal;
+
 int DrawEscapeTime ()
 {
 
