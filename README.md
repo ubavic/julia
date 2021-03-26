@@ -6,7 +6,7 @@ Julia is a simple fractal generator written in C.
 
 ## Building
 
-Just run `make` inside the repository folder. The program should compile on Linux, Windows, and Mac without problems. The only dependency of this program is the getopt library.
+Just run `make` inside the `src` folder. The program should compile on Linux, Windows, and Mac without problems. The only dependency of this program is the getopt library.
 
 ## Usage
 
@@ -21,6 +21,7 @@ Run  `julia [OPTIONS]`. Available options are
   + `-h`, `--help`: print help message;
   + `-i`, `--iterations=ITERATIONS`: set the iteration number;
   + `-j`, `--julia=JULIA_CONST`: render Julia fractal with `JULIA_CONST` as a parameter;
+  + `-k`, `--kappa=KAPPA`: set `KAPPA` parametar;
   + `-l`, `--load=PATHNAME`: load PPM image from `PATHNAME`;
   + `-o`, `--output=PATHNAME`: set output image path to `PATHNAME`;
   + `-p`, `--palette=PATHNAME`: load palette from `PATHNAME`;
