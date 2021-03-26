@@ -12,8 +12,8 @@
                 "  -f, --fractal=FRACTAL          set fractal\n"\
                 "  -h, --help                     print this message \n"\
                 "  -i, --iterations=ITERATIONS    set the iteration number used for calculating sets\n"\
-                "  -j, --julia=JULIA_CONST        render Julia fractal with JULIA_CONST as parametar\n"\
-                "  -k, --kappa=KAPPA              set KAPPA parametar\n"\
+                "  -j, --julia=JULIA_CONST        render Julia fractal with JULIA_CONST as parameter\n"\
+                "  -k, --kappa=KAPPA              set KAPPA parameter\n"\
                 "  -l, --load=PATHNAME            load PPM image from PATHNAME\n"\
                 "  -o, --output=PATHNAME          set output image path to PATHNAME\n"\
                 "  -p, --palette=PATHNAME         loads palette from PATHNAME\n"\

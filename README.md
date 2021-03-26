@@ -21,7 +21,7 @@ Run  `julia [OPTIONS]`. Available options are
   + `-h`, `--help`: print help message;
   + `-i`, `--iterations=ITERATIONS`: set the iteration number;
   + `-j`, `--julia=JULIA_CONST`: render Julia fractal with `JULIA_CONST` as a parameter;
-  + `-k`, `--kappa=KAPPA`: set `KAPPA` parametar;
+  + `-k`, `--kappa=KAPPA`: set `KAPPA` parameter;
   + `-l`, `--load=PATHNAME`: load PPM image from `PATHNAME`;
   + `-o`, `--output=PATHNAME`: set output image path to `PATHNAME`;
   + `-p`, `--palette=PATHNAME`: load palette from `PATHNAME`;
