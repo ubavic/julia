@@ -23,7 +23,7 @@ unsigned char BMPheader [54] = {
             0x00, 0x00, 0x00, 0x00 
         };
 
-int OpenImage(struct Image *image)
+int OpenImage (struct Image *image)
 {
 	image->row = (unsigned char*) malloc(3 * image->width * sizeof(unsigned char));
 
@@ -67,7 +67,7 @@ int OpenImage(struct Image *image)
     return 0;
 }
 
-void WriteRow(struct Image *image)
+void WriteRow (struct Image *image)
 {
     fwrite(image->row, 3 * sizeof(unsigned char), image->width, image->imageFile);
 
@@ -75,7 +75,7 @@ void WriteRow(struct Image *image)
         fwrite(zeros, sizeof(unsigned char), image->extraBits, image->imageFile);
 }
 
-int CloseImage(struct Image *image)
+int CloseImage (struct Image *image)
 {
     free(image->row);
     fclose(image->imageFile);
@@ -83,7 +83,8 @@ int CloseImage(struct Image *image)
     return 0;
 }
 
-int GetPixelFromPoint(complex w){
+int GetPixelFromPoint (complex w)
+{
     unsigned int row = floor((w.im - fractal.origin.im)/outputImage.delta); 
     unsigned int column = floor((w.re - fractal.origin.re)/outputImage.delta);
     if (row >= outputImage.height || row < 0 || column >= outputImage.width || column < 0)
@@ -92,8 +93,8 @@ int GetPixelFromPoint(complex w){
         return row*outputImage.width + column;
 }
 
-int LoadImageFromPPM(struct Image *image){
-
+int LoadImageFromPPM (struct Image *image)
+{
     unsigned char* string = (unsigned char *) malloc(12 * sizeof(unsigned char));
     unsigned char c;
     int i, j;

@@ -39,8 +39,8 @@ void InsideImage (unsigned int, struct Color *);
 
 void HSVtoRGB (double, double, double, struct Color *);
 
-void AvergePalette(struct Color *, int, struct Color *);
+void AvergePalette (struct Color *, int, struct Color *);
 
-int LoadPalete(char *);
+int LoadPalete (char *);
 
 #endif

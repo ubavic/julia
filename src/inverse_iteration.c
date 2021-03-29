@@ -10,7 +10,7 @@ extern struct Fractal fractal;
 char *plane;
 int exponent;
 
-complex ReturnInverseImage(complex w, int i)
+complex ReturnInverseImage (complex w, int i)
 {
     complex inverseImage;
 
@@ -26,7 +26,7 @@ complex ReturnInverseImage(complex w, int i)
     return inverseImage;
 }
 
-void InverseIterate(complex z, int iteration)
+void InverseIterate (complex z, int iteration)
 {
     int pixel;
 
@@ -57,7 +57,7 @@ void InverseIterate(complex z, int iteration)
    }
 }
 
-int DrawInverseIteration()
+int DrawInverseIteration ()
 {
     complex z;
     unsigned int i, x, y;

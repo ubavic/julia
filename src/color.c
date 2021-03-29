@@ -72,10 +72,8 @@ void ArgumentColor (unsigned int i, struct Color *color)
 
 void ContinuousArgumentColor (unsigned int i, struct Color *color)
 {
-    double angle = atan2(fractal.orbit[fractal.kappa].im, fractal.orbit[fractal.kappa].re); 
-    angle = angle * IPI + 0.5;
-    unsigned int n = mainPalette.colors * angle;
-    n = n % mainPalette.colors;
+    double angle = atan2(fractal.orbit[fractal.kappa].im, fractal.orbit[fractal.kappa].re) * IPI + 0.5;
+    unsigned int n = ((int)(mainPalette.colors * angle)) % mainPalette.colors;
     unsigned int m = (n + 1) % mainPalette.colors;
     angle = angle*mainPalette.colors - n;
     color->r = mainPalette.palette[n].r * (1 - angle) + mainPalette.palette[m].r * angle;
@@ -260,7 +258,7 @@ void HSVtoRGB (double H, double S, double V, struct Color *color)
     color->b = 0xFF * b;
 }
 
-void AvergePalette(struct Color *palette, int n, struct Color *color) 
+void AvergePalette (struct Color *palette, int n, struct Color *color) 
 {
     int r = 0, g = 0, b = 0;
     int i;
@@ -277,7 +275,7 @@ void AvergePalette(struct Color *palette, int n, struct Color *color)
 }
 
 
-int LoadPalete(char *fileName)
+int LoadPalete (char *fileName)
 {
     int n, i = 0, first = 0;
     FILE *inputFile;
