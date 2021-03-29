@@ -60,25 +60,25 @@ void SmoothColor (unsigned int i, struct Color *color)
 
 void ArgumentColor (unsigned int i, struct Color *color)
 {
-	if (fractal.orbit[fractal.kappa].re > 0 && fractal.orbit[fractal.kappa].im > 0)	
+    if (fractal.orbit[fractal.kappa].re > 0 && fractal.orbit[fractal.kappa].im > 0) 
         *color = mainPalette.palette[0];
-	else if (fractal.orbit[fractal.kappa].re < 0 && fractal.orbit[fractal.kappa].im > 0)
-		*color = mainPalette.palette[1];
-	else if (fractal.orbit[fractal.kappa].re < 0 && fractal.orbit[fractal.kappa].im < 0)
-		*color = mainPalette.palette[2];
-	else
-		*color = mainPalette.palette[3];	
+    else if (fractal.orbit[fractal.kappa].re < 0 && fractal.orbit[fractal.kappa].im > 0)
+        *color = mainPalette.palette[1];
+    else if (fractal.orbit[fractal.kappa].re < 0 && fractal.orbit[fractal.kappa].im < 0)
+        *color = mainPalette.palette[2];
+    else
+        *color = mainPalette.palette[3];
 }
 
 void ContinuousArgumentColor (unsigned int i, struct Color *color)
 {
-	double angle = atan2(fractal.orbit[fractal.kappa].im, fractal.orbit[fractal.kappa].re); 
+    double angle = atan2(fractal.orbit[fractal.kappa].im, fractal.orbit[fractal.kappa].re); 
     angle = angle * IPI + 0.5;
-	unsigned int n = mainPalette.colors * angle;
-	n = n % mainPalette.colors;
-	unsigned int m = (n + 1) % mainPalette.colors;
-	angle = angle*mainPalette.colors - n;
-	color->r = mainPalette.palette[n].r * (1 - angle) + mainPalette.palette[m].r * angle;
+    unsigned int n = mainPalette.colors * angle;
+    n = n % mainPalette.colors;
+    unsigned int m = (n + 1) % mainPalette.colors;
+    angle = angle*mainPalette.colors - n;
+    color->r = mainPalette.palette[n].r * (1 - angle) + mainPalette.palette[m].r * angle;
     color->g = mainPalette.palette[n].g * (1 - angle) + mainPalette.palette[m].g * angle;
     color->b = mainPalette.palette[n].b * (1 - angle) + mainPalette.palette[m].b * angle;
 }
@@ -86,15 +86,15 @@ void ContinuousArgumentColor (unsigned int i, struct Color *color)
 void GridColor (unsigned int i, struct Color *color)
 {
     i--;
-	double angle = atan2(fractal.orbit[i].im, fractal.orbit[i].re) * IPI + 0.5;
-	double mu = i + 1 - log(log(sqrt(fractal.rho))) / log(fractal.exponent);
- 	double ro = (fractal.rho - fractal.radius) / (pow(fractal.radius, fractal.exponent) - fractal.radius);
-	int m = ro < 0.80 ? 1 : 0;
-	int a = angle > (0.495 - ro * 0.005) && angle < (0.505 + ro * 0.005) ? 0 : 1;
-   	if (a && m)
+    double angle = atan2(fractal.orbit[i].im, fractal.orbit[i].re) * IPI + 0.5;
+    double mu = i + 1 - log(log(sqrt(fractal.rho))) / log(fractal.exponent);
+    double ro = (fractal.rho - fractal.radius) / (pow(fractal.radius, fractal.exponent) - fractal.radius);
+    int m = ro < 0.80 ? 1 : 0;
+    int a = angle > (0.495 - ro * 0.005) && angle < (0.505 + ro * 0.005) ? 0 : 1;
+    if (a && m)
         *color = mainPalette.palette[1];
     else
-		*color = mainPalette.palette[0];
+        *color = mainPalette.palette[0];
 }
 
 void GridImage (unsigned int i, struct Color *color)
@@ -132,14 +132,19 @@ void DiskRainbowColor (unsigned int i, struct Color *color)
 {
     HSVtoRGB (
         atan2(fractal.orbit[fractal.kappa].im, fractal.orbit[fractal.kappa].re) / (2 * PI),
-        pow(NormSq(fractal.orbit[fractal.kappa]) / fractal.radius, 0.05),
-        1 - sin(PI*NormSq(fractal.orbit[fractal.kappa]) / (fractal.radius * 2) * sin(PI * NormSq(fractal.orbit[fractal.kappa]) / (fractal.radius * 2))),
+        pow(
+            NormSq(fractal.orbit[fractal.kappa]) / fractal.radius, 0.05),
+            1 - sin(PI * NormSq(fractal.orbit[fractal.kappa]) / (fractal.radius * 2) *
+                sin(PI * NormSq(fractal.orbit[fractal.kappa]) / (fractal.radius * 2))),
         color);
 }
 
 void SpeedColor (unsigned int i, struct Color *color)
 {
-    double mu =  NormSq(Sub(fractal.orbit[i],fractal.orbit[i-fractal.kappa]))/NormSq(Sub(fractal.orbit[i-fractal.kappa],fractal.orbit[i-2*fractal.kappa])); 
+    double mu =  NormSq(
+        Sub(fractal.orbit[i],fractal.orbit[i-fractal.kappa])) /
+        NormSq(Sub(fractal.orbit[i-fractal.kappa],fractal.orbit[i-2*fractal.kappa])
+        );
     mu = log(mu + 1);
     int clr1 = (int) mu;
     double t2 = mu - clr1;
@@ -225,51 +230,50 @@ void BotcherImageColor (unsigned int i, struct Color *color)
     color->r = inputImage.row[i];
     color->g = inputImage.row[i+1];
     color->b = inputImage.row[i+2];
-    
 }
 
 void HSVtoRGB (double H, double S, double V, struct Color *color)
 {
-	double i, f, p, q, t, r, g, b;
-	
-	if (S == 0)
-		r = g = b = V;
-	else {
-		H = 6 * (H - floorf(H));
-		int ii = i = floorf(H);
-		f = H - i;
-		p = V * (1 - S);
-		q = V * (1 - (S * f));
-		t = V * (1 - (S * (1 - f)));
-		switch(ii) {
-			case 0: r = V; g = t; b = p; break;
-			case 1: r = q; g = V; b = p; break;
-			case 2: r = p; g = V; b = t; break;
-			case 3: r = p; g = q; b = V; break;
-			case 4: r = t; g = p; b = V; break;
-			default:r = V; g = p; b = q; break;
-		}
-	}
+    double i, f, p, q, t, r, g, b;
+    
+    if (S == 0)
+        r = g = b = V;
+    else {
+        H = 6 * (H - floorf(H));
+        int ii = i = floorf(H);
+        f = H - i;
+        p = V * (1 - S);
+        q = V * (1 - (S * f));
+        t = V * (1 - (S * (1 - f)));
+        switch(ii) {
+            case 0: r = V; g = t; b = p; break;
+            case 1: r = q; g = V; b = p; break;
+            case 2: r = p; g = V; b = t; break;
+            case 3: r = p; g = q; b = V; break;
+            case 4: r = t; g = p; b = V; break;
+            default:r = V; g = p; b = q; break;
+        }
+    }
 
-	color->r = 0xFF * r;
-	color->g = 0xFF * g;
-	color->b = 0xFF * b;
+    color->r = 0xFF * r;
+    color->g = 0xFF * g;
+    color->b = 0xFF * b;
 }
 
 void AvergePalette(struct Color *palette, int n, struct Color *color) 
 {
-	int r = 0, g = 0, b = 0;
-	int i;
+    int r = 0, g = 0, b = 0;
+    int i;
 
-	for (i = 0; i < n; i++) {
-		r += palette[i].r;
-		g += palette[i].g;
-		b += palette[i].b;
-	}
+    for (i = 0; i < n; i++) {
+        r += palette[i].r;
+        g += palette[i].g;
+        b += palette[i].b;
+    }
 
-	color->r = r / n;
-	color->g = g / n;
-	color->b = b / n;
+    color->r = r / n;
+    color->g = g / n;
+    color->b = b / n;
 }
 
 
@@ -318,7 +322,6 @@ int LoadPalete(char *fileName)
         if (strlen(string) != 7)
             continue;
 
-        //printf("%s\n", string);
         n = (int) strtol(&string[1], NULL, 16);
 
         if (!first) {

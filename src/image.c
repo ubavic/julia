@@ -35,7 +35,7 @@ int OpenImage(struct Image *image)
     for (int i = 0; i < 3 * image->width; ++i)
         image->row[i] = 0x00;
 
-	image->imageFile = fopen(image->fileName, "w+");
+    image->imageFile = fopen(image->fileName, "w+");
 
     if (image->imageFile == NULL){
         perror("The following error occurred:");
@@ -77,7 +77,7 @@ void WriteRow(struct Image *image)
 
 int CloseImage(struct Image *image)
 {
-	free(image->row);
+    free(image->row);
     fclose(image->imageFile);
 
     return 0;
