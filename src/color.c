@@ -98,10 +98,14 @@ void GridColor (unsigned int i, struct Color *color)
 void GridImage (unsigned int i, struct Color *color)
 {
     i--;
-    double angle = atan2(fractal.orbit[i].im, fractal.orbit[i].re) / (PI * 2) + 0.5;
+    double angle = atan2(fractal.orbit[i].im, fractal.orbit[i].re) / PI + 1;
     //double ro = 2 - log(0.5*(log(fractal.rho) - fractal.exponent));
     double ro = log(log(sqrt(fractal.rho)) / log(sqrt(fractal.radius))) / log(fractal.exponent);
     int m = ro < 1 && ro > 0 ? 1 : 0;
+
+    if (angle > 1)
+        angle--;
+
     if (m) {
         int j = ro * inputImage.height;
         int k = angle * inputImage.width;
