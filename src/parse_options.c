@@ -5,7 +5,7 @@
 #include "global.h"
 #include "color.h"
 
-extern struct Image outputImage;
+extern struct BMPImage outputImage;
 extern struct PPMImage inputImage;
 extern struct Fractal fractal;
 
@@ -35,7 +35,7 @@ int Parse (int argc, char** argv)
                 printf ("\n");
                 break;
             case 'a':
-                sscanf(optarg, "%u", &outputImage.algorithm);
+                sscanf(optarg, "%u", &fractal.algorithm);
                 if (fractal.type > 2) {
                     strcat(strBuffer,  "Algorithm can be 0, 1 or 2. Using default value (0).\n");
                     fractal.type = 0;
@@ -90,21 +90,21 @@ int Parse (int argc, char** argv)
                     return 1;
                 break;
             case 'r':
-                sscanf(optarg, "%u:%u", &outputImage.renderOutside, &outputImage.renderInside);
-                if (outputImage.renderOutside > 11) {
+                sscanf(optarg, "%u:%u", &fractal.renderOutside, &fractal.renderInside);
+                if (fractal.renderOutside > 11) {
                     strcat(strBuffer,  "Outside render number can be from 0 to 7. Using the default value (1).\n");
-                    outputImage.renderOutside = 1;
+                    fractal.renderOutside = 1;
                 }
-                if (outputImage.renderInside > 5) {
+                if (fractal.renderInside > 5) {
                     strcat(strBuffer,  "Inside render number can be 0 to 5. Using the default value (1).\n");
-                    outputImage.renderOutside = 1;
+                    fractal.renderOutside = 1;
                 }
                 break;
             case 'z':
-                sscanf(optarg, "%lf", &outputImage.zoom);
-                if (outputImage.zoom < 0){
+                sscanf(optarg, "%lf", &fractal.zoom);
+                if (fractal.zoom < 0){
                     strcat(strBuffer,  "The zoom factor must be bigger than 0. Using the default value (1).\n");
-                    outputImage.zoom = 1.0;
+                    fractal.zoom = 1.0;
                 }
                 break;
             default:

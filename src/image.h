@@ -3,11 +3,11 @@
 
 #include "global.h"
 
-int OpenImage (struct Image*);
+int OpenBMPImage (struct BMPImage*);
 
-void WriteRow (struct Image*);
+void WriteRowToBMPImage (struct BMPImage*);
 
-int CloseImage (struct Image*);
+int CloseBMPImage (struct BMPImage*);
 
 int LoadPPMImage (struct PPMImage*);
 

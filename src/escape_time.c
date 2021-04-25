@@ -6,7 +6,7 @@
 #include "color.h"
 #include "escape_time.h"
 
-extern struct Image outputImage;
+extern struct BMPImage outputImage;
 extern struct PPMImage inputImage;
 extern struct Fractal fractal;
 
@@ -23,7 +23,7 @@ int DrawEscapeTime ()
     void (*GetOutsideColor)(unsigned int, struct Color *);
     void (*GetInsideColor)(unsigned int, struct Color *);
 
-    switch(outputImage.renderOutside){
+    switch(fractal.renderOutside){
         case 0:
             GetOutsideColor = &GetOutside;
             break;
@@ -80,7 +80,7 @@ int DrawEscapeTime ()
             break;  
     }
 
-    switch(outputImage.renderInside){
+    switch(fractal.renderInside){
         case 0:
             GetInsideColor = &GetInside;
             break;
@@ -157,11 +157,11 @@ int DrawEscapeTime ()
             outputImage.row[x+1] = color.g;
             outputImage.row[x+2] = color.r;
 
-            z.re+=outputImage.delta;
+            z.re+=fractal.delta;
         }
 
-        WriteRow(&outputImage);
-        z.im+=outputImage.delta;
+        WriteRowToBMPImage(&outputImage);
+        z.im+=fractal.delta;
     }
 
     return 0;

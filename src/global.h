@@ -21,19 +21,14 @@ struct Color {
     unsigned char b;
 };
 
-struct Image {
+struct BMPImage {
     FILE *imageFile;
     char *fileName;
     unsigned int width;
     unsigned int height;
     unsigned int extraBits;
     unsigned int fileSize;
-    unsigned int renderOutside;
-    unsigned int renderInside;
-    unsigned int algorithm;
     unsigned char *row;
-    double zoom;
-    double delta;
 };
 
 struct PPMImage {
@@ -52,12 +47,17 @@ struct Palette {
 };
 
 struct Fractal {
+    unsigned int algorithm;
     unsigned int type;
     unsigned int iterations;
     unsigned int kappa;
+    unsigned int renderOutside;
+    unsigned int renderInside;
+    double delta;
     double exponent;
     double rho;
     double radius;
+    double zoom;
     complex origin;
     complex constant;
     complex *orbit;

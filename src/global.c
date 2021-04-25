@@ -1,6 +1,6 @@
 #include "global.h"
 
-struct Image outputImage;
+struct BMPImage outputImage;
 struct PPMImage inputImage;
 struct Palette mainPalette;
 struct Fractal fractal;

@@ -4,7 +4,7 @@
 #include "global.h"
 #include "color.h"
 
-extern struct Image outputImage;
+extern struct BMPImage outputImage;
 extern struct Fractal fractal;
 
 unsigned int findCycle (unsigned int iterations)
@@ -92,7 +92,7 @@ int DrawBudhabrot ()
             outputImage.row[3*x + 1] = 0xFF*plane[y*outputImage.width+x]/max;
             outputImage.row[3*x + 2] = 0xFF*plane[y*outputImage.width+x]/max;
         }
-        WriteRow(&outputImage);
+        WriteRowToBMPImage(&outputImage);
     }
 
     free(plane);

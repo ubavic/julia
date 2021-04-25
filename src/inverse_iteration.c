@@ -3,7 +3,7 @@
 #include "global.h"
 #include "color.h"
 
-extern struct Image outputImage;
+extern struct BMPImage outputImage;
 extern struct Palette mainPalette;
 extern struct Fractal fractal;
 
@@ -96,7 +96,7 @@ int DrawInverseIteration ()
             outputImage.row[x+2] = color.r;
         }
 
-        WriteRow(&outputImage);
+        WriteRowToBMPImage(&outputImage);
     }
 
     free(plane);
