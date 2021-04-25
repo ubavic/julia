@@ -9,7 +9,7 @@ void WriteRow (struct Image*);
 
 int CloseImage (struct Image*);
 
-int LoadImageFromPPM (struct Image *);
+int LoadPPMImage (struct PPMImage*);
 
 int GetPixelFromPoint (complex);
 

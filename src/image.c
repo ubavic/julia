@@ -93,7 +93,7 @@ int GetPixelFromPoint (complex w)
         return row*outputImage.width + column;
 }
 
-int LoadImageFromPPM (struct Image *image)
+int LoadPPMImage (struct PPMImage *image)
 {
     unsigned char* string = (unsigned char *) malloc(12 * sizeof(unsigned char));
     unsigned char c;
@@ -148,9 +148,9 @@ int LoadImageFromPPM (struct Image *image)
 
     while (fgetc(image->imageFile) != '\n') ;
 
-    image->row = (unsigned char*) malloc (3 * image->width * image->height *  sizeof(unsigned char));
+    image->data = (unsigned char*) malloc (3 * image->width * image->height *  sizeof(unsigned char));
 
-    if(fread(image->row, 3 * image->width,  image->height, image->imageFile) != image->height){
+    if(fread(image->data, 3 * image->width,  image->height, image->imageFile) != image->height){
         fprintf(stderr, "Error loading image '%s'\n", image->fileName);
         return 1;
     }

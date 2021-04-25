@@ -1,7 +1,7 @@
 #include "color.h"
 #include "image.h"
 
-extern struct Image inputImage;
+extern struct PPMImage inputImage;
 extern struct Palette mainPalette;
 extern struct Fractal fractal;
 
@@ -110,9 +110,9 @@ void GridImage (unsigned int i, struct Color *color)
         int j = ro * inputImage.height;
         int k = angle * inputImage.width;
         i = 3 * (int)(j * (inputImage.width) + k);
-        color->r = inputImage.row[i];
-        color->g = inputImage.row[i+1];
-        color->b = inputImage.row[i+2];
+        color->r = inputImage.data[i];
+        color->g = inputImage.data[i+1];
+        color->b = inputImage.data[i+2];
     }
 }
 
@@ -122,9 +122,9 @@ void InsideImage (unsigned int i, struct Color *color)
     int k = (fractal.orbit[fractal.kappa].re / 4 + 0.5) * inputImage.width;
     if (j > 0 && k > 0 && j < inputImage.height && k < inputImage.width) {
         i = 3 * (int) (j * inputImage.width + k);
-        color->r = inputImage.row[i];
-        color->g = inputImage.row[i+1];
-        color->b = inputImage.row[i+2];
+        color->r = inputImage.data[i];
+        color->g = inputImage.data[i+1];
+        color->b = inputImage.data[i+2];
     } else {
         *color = mainPalette.insideColor;
     }
@@ -229,9 +229,9 @@ void BotcherImageColor (unsigned int i, struct Color *color)
     int j = ro * inputImage.height;
     int k = angle * inputImage.width;
     i = 3 * (int) (j * inputImage.width + k);
-    color->r = inputImage.row[i];
-    color->g = inputImage.row[i+1];
-    color->b = inputImage.row[i+2];
+    color->r = inputImage.data[i];
+    color->g = inputImage.data[i+1];
+    color->b = inputImage.data[i+2];
 }
 
 void HSVtoRGB (double H, double S, double V, struct Color *color)

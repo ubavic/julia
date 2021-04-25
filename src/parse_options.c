@@ -6,7 +6,7 @@
 #include "color.h"
 
 extern struct Image outputImage;
-extern struct Image inputImage;
+extern struct PPMImage inputImage;
 extern struct Fractal fractal;
 
 int Parse (int argc, char** argv)
@@ -77,7 +77,7 @@ int Parse (int argc, char** argv)
             case 'l':
                 inputImage.fileName = malloc(20*sizeof(char));
                 sscanf(optarg, "%s", inputImage.fileName);
-                if(LoadImageFromPPM(&inputImage)){
+                if(LoadPPMImage(&inputImage)){
                     printf("Can't load PPM image\n");
                     return 1;
                 }

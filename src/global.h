@@ -36,6 +36,14 @@ struct Image {
     double delta;
 };
 
+struct PPMImage {
+    FILE *imageFile;
+    char *fileName;
+    unsigned int width;
+    unsigned int height;
+    unsigned char *data;
+};
+
 struct Palette {
     struct Color insideColor;
     struct Color avergeColor;

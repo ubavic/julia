@@ -7,7 +7,7 @@
 #include "escape_time.h"
 
 extern struct Image outputImage;
-extern struct Image inputImage;
+extern struct PPMImage inputImage;
 extern struct Fractal fractal;
 
 int DrawEscapeTime ()
