@@ -9,30 +9,30 @@ extern struct BMPImage outputImage;
 extern struct PPMImage inputImage;
 extern struct Fractal fractal;
 
-int Parse (int argc, char** argv)
+int Parse(int argc, char** argv)
 {
     int c, option_index;
     char strBuffer[512];
 
     strBuffer[0] = 0x00;
 
-    while (1){
-        c = getopt_long (argc, argv, "a:b:c:d:e:f:hi:j:k:l:o:p:r:z:", long_options, &option_index);
+    while (1) {
+        c = getopt_long(argc, argv, "a:b:c:d:e:f:hi:j:k:l:o:p:r:z:", long_options, &option_index);
 
         if (c == -1)
             break;
 
-        switch (c){
+        switch (c) {
             case 0:
                 if (long_options[option_index].flag != 0)
                     break;
 
-                printf ("option %s", long_options[option_index].name);
+                printf("option %s", long_options[option_index].name);
 
                 if (optarg)
-                    printf (" with arg %s", optarg);
+                    printf(" with arg %s", optarg);
 
-                printf ("\n");
+                printf("\n");
                 break;
             case 'a':
                 sscanf(optarg, "%u", &fractal.algorithm);
@@ -56,7 +56,7 @@ int Parse (int argc, char** argv)
             case 'f':
                 sscanf(optarg, "%u", &fractal.type);
                 if (fractal.type > 3) {
-                    strcat(strBuffer,  "Fractal number can be 0, 1, 2 or 3. Using default value (1).\n");
+                    strcat(strBuffer, "Fractal number can be 0, 1, 2 or 3. Using default value (1).\n");
                     fractal.type = 1;
                 }
                 break;
@@ -75,9 +75,9 @@ int Parse (int argc, char** argv)
                 sscanf(optarg, "%u", &fractal.kappa);
                 break;
             case 'l':
-                inputImage.fileName = malloc(20*sizeof(char));
+                inputImage.fileName = malloc(20 * sizeof(char));
                 sscanf(optarg, "%s", inputImage.fileName);
-                if(LoadPPMImage(&inputImage)){
+                if (LoadPPMImage(&inputImage)) {
                     printf("Can't load PPM image\n");
                     return 1;
                 }
@@ -86,23 +86,23 @@ int Parse (int argc, char** argv)
                 sscanf(optarg, "%s", outputImage.fileName);
                 break;
             case 'p':
-                if(LoadPalete(optarg))
+                if (LoadPalete(optarg))
                     return 1;
                 break;
             case 'r':
                 sscanf(optarg, "%u:%u", &fractal.renderOutside, &fractal.renderInside);
                 if (fractal.renderOutside > 11) {
-                    strcat(strBuffer,  "Outside render number can be from 0 to 7. Using the default value (1).\n");
+                    strcat(strBuffer, "Outside render number can be from 0 to 7. Using the default value (1).\n");
                     fractal.renderOutside = 1;
                 }
                 if (fractal.renderInside > 5) {
-                    strcat(strBuffer,  "Inside render number can be 0 to 5. Using the default value (1).\n");
+                    strcat(strBuffer, "Inside render number can be 0 to 5. Using the default value (1).\n");
                     fractal.renderOutside = 1;
                 }
                 break;
             case 'z':
                 sscanf(optarg, "%lf", &fractal.zoom);
-                if (fractal.zoom < 0){
+                if (fractal.zoom < 0) {
                     strcat(strBuffer,  "The zoom factor must be bigger than 0. Using the default value (1).\n");
                     fractal.zoom = 1.0;
                 }
@@ -112,17 +112,17 @@ int Parse (int argc, char** argv)
         }
     }
 
-    if (optind < argc){
-        printf ("Invalid options: ");
+    if (optind < argc) {
+        printf("Invalid options: ");
 
         while (optind < argc)
-            printf ("%s ", argv[optind++]);
+            printf("%s ", argv[optind++]);
 
         printf("Type mandelbrot --help for usage.\n");
         return 1;
     }
 
-    printf("%s",strBuffer);
+    printf("%s", strBuffer);
 
     return 0;
 }

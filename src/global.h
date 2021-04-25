@@ -84,19 +84,19 @@ static struct Color colorBlue   = {0x00, 0x00, 0xFF};
 static struct Color colorWhite  = {0xFF, 0xFF, 0xFF};
 static struct Color colorBlack  = {0x00, 0x00, 0x00};
 
-double getRandom ();
-double sigmoid1 (double);
-double sigmoid2 (double);
-double sigmoid3 (double);
-complex Add (complex, complex);
-complex Sub (complex, complex);
-complex Mul (complex, complex);
-complex Div (complex, complex);
-complex Con (complex);
-complex RealExp (complex, double);
-double NormSq (complex);
-double Norm (complex);
-void Print (complex);
+double getRandom();
+double sigmoid1(double);
+double sigmoid2(double);
+double sigmoid3(double);
+complex Add(complex, complex);
+complex Sub(complex, complex);
+complex Mul(complex, complex);
+complex Div(complex, complex);
+complex Con(complex);
+complex RealExp(complex, double);
+double NormSq(complex);
+double Norm(complex);
+void Print(complex);
 
 static unsigned int primes[] = {2, 3, 5,  7, 11 , 13 , 17 , 19 , 23 , 29 , 31 , 37 , 41 , 43 , 47 , 53 , 59 , 61 , 67,
 71  ,  73 ,  79 ,  83 ,  89 ,  97 , 101 , 103 , 107 , 109 , 113 , 127 , 131 , 137 , 139 , 149 , 151 , 157 , 163,

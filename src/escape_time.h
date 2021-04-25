@@ -3,14 +3,14 @@
 
 #include "global.h"
 
-int DrawEscapeTime ();
+int DrawEscapeTime();
 
-complex Mandelbrot (complex, complex);
+complex Mandelbrot(complex, complex);
 
-complex Multibrot (complex, complex);
+complex Multibrot(complex, complex);
 
-complex Mandelbar (complex, complex);
+complex Mandelbar(complex, complex);
 
-complex Ship (complex, complex);
+complex Ship(complex, complex);
 
 #endif

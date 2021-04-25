@@ -7,7 +7,7 @@ extern struct Fractal fractal;
 static unsigned char zeros [3] = {0x00, 0x00, 0x00};
 
 unsigned char BMPheader [54] = {
-			'B', 'M',
+            'B', 'M',
             0x00, 0x00, 0x00, 0x00,
             0x00, 0x00, 0x00, 0x00,
             54,   0x00, 0x00, 0x00,
@@ -25,9 +25,9 @@ unsigned char BMPheader [54] = {
 
 int OpenBMPImage (struct BMPImage *image)
 {
-	image->row = (unsigned char*) malloc(3 * image->width * sizeof(unsigned char));
+    image->row = (unsigned char*) malloc(3 * image->width * sizeof(unsigned char));
 
-    if (image->row == NULL){
+    if (image->row == NULL) {
         perror("The following error occurred:");
         return 1;
     }
@@ -37,7 +37,7 @@ int OpenBMPImage (struct BMPImage *image)
 
     image->imageFile = fopen(image->fileName, "w+");
 
-    if (image->imageFile == NULL){
+    if (image->imageFile == NULL) {
         perror("The following error occurred:");
         return 1;
     }
@@ -85,28 +85,28 @@ int CloseBMPImage (struct BMPImage *image)
 
 int GetPixelFromPoint (complex w)
 {
-    unsigned int row = floor((w.im - fractal.origin.im)/fractal.delta); 
-    unsigned int column = floor((w.re - fractal.origin.re)/fractal.delta);
+    unsigned int row = floor((w.im - fractal.origin.im) / fractal.delta); 
+    unsigned int column = floor((w.re - fractal.origin.re) / fractal.delta);
     if (row >= outputImage.height || row < 0 || column >= outputImage.width || column < 0)
         return -1;
     else
-        return row*outputImage.width + column;
+        return row * outputImage.width + column;
 }
 
-int LoadPPMImage (struct PPMImage *image)
+int LoadPPMImage (struct PPMImage* image)
 {
     unsigned char* string = (unsigned char *) malloc(12 * sizeof(unsigned char));
     unsigned char c;
     int i, j;
 
-    image->imageFile = fopen(image->fileName,"r+");
+    image->imageFile = fopen(image->fileName, "r+");
 
-    if (image->imageFile == NULL){
+    if (image->imageFile == NULL) {
         perror("The following error occurred:");
         return 1;
     }
 
-    for (i=0; i<12; i++)
+    for (i=0; i<12; ++i)
         string[i] = 0;
 
     i=0;
@@ -116,8 +116,7 @@ int LoadPPMImage (struct PPMImage *image)
     } while (c != 0x0a && c != 0x20);
     string[i-1] = 0;
 
-    if (strcmp(string, "P6"))
-    {
+    if (strcmp(string, "P6")) {
         printf("Not a PPM file\n");
         return 1;
     }
@@ -150,7 +149,7 @@ int LoadPPMImage (struct PPMImage *image)
 
     image->data = (unsigned char*) malloc (3 * image->width * image->height *  sizeof(unsigned char));
 
-    if(fread(image->data, 3 * image->width,  image->height, image->imageFile) != image->height){
+    if(fread(image->data, 3 * image->width,  image->height, image->imageFile) != image->height) {
         fprintf(stderr, "Error loading image '%s'\n", image->fileName);
         return 1;
     }

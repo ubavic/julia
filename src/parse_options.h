@@ -4,7 +4,7 @@
 #include <getopt.h>
 
 #define HELPMSG "Usage: julia [OPTIONS]\n"\
-	"  -a, --algorithm=ALGORITHM      choose drawing algorithm \n"\
+    "  -a, --algorithm=ALGORITHM      choose drawing algorithm \n"\
     "  -b, --bailout=BAILOUT          set bailout radius to BAILOUT\n"\
     "  -c, --center=POINT             set center of the image to POINT\n"\
     "  -d, --dimensions=DIMENSIONS    set dimensions of the image to DIMENSIONS\n"\
@@ -62,7 +62,7 @@
     "./julia -f 0 -c 0.2:-0.5 -d 2000:2000 -z 3.0 -r 2 -p palette2\n"
 
 static struct option long_options[] ={
-	{"algorithm",   required_argument,  0,      'a'},
+    {"algorithm",   required_argument,  0,      'a'},
     {"bailout",     required_argument,  0,      'b'},
     {"center",      required_argument,  0,      'c'},
     {"dimensions",  required_argument,  0,      'd'},
@@ -80,6 +80,6 @@ static struct option long_options[] ={
     {0, 0, 0, 0}
 };
 
-int Parse (int, char **);
+int Parse(int, char**);
 
 #endif

@@ -18,10 +18,10 @@ complex ReturnInverseImage (complex w, int i)
     w.im = w.im - fractal.constant.im;
 
     double angle = atan2(w.im, w.re)/fractal.exponent;
-    double radius = pow(w.re * w.re + w.im * w.im, 1/(2*fractal.exponent));
+    double radius = pow(w.re * w.re + w.im * w.im, 1 / (2 * fractal.exponent));
 
-    inverseImage.re = radius*cos(angle + i*2*PI/fractal.exponent);
-    inverseImage.im = radius*sin(angle + i*2*PI/fractal.exponent);
+    inverseImage.re = radius * cos(angle + i * 2 * PI/fractal.exponent);
+    inverseImage.im = radius * sin(angle + i * 2 * PI/fractal.exponent);
 
     return inverseImage;
 }
@@ -30,7 +30,7 @@ void InverseIterate (complex z, int iteration)
 {
     int pixel;
 
-    if (iteration >= fractal.iterations){
+    if (iteration >= fractal.iterations) {
         pixel = GetPixelFromPoint(z);
         if (pixel == -1)
             return;
@@ -41,13 +41,13 @@ void InverseIterate (complex z, int iteration)
 
    complex w;
 
-   for (int i = 0; i < exponent; i++) {
+   for (int i = 0; i < exponent; ++i) {
         w = ReturnInverseImage(z, i);
         pixel = GetPixelFromPoint(w);
         if (pixel == -1)
             return;
 
-        if (plane[pixel] == 0){
+        if (plane[pixel] == 0) {
             plane[pixel] = iteration;
             InverseIterate(w, ++iteration);
         } else {
@@ -68,13 +68,13 @@ int DrawInverseIteration ()
     if (fractal.kappa == 0)
         fractal.kappa = 10;
 
-    plane = (char *) malloc(outputImage.height*outputImage.width);
-    if (plane == NULL){
+    plane = (char *) malloc(outputImage.height * outputImage.width);
+    if (plane == NULL) {
         perror("The following error occurred:");
         return 1;
     }
 
-    for (int i = 0; i < outputImage.height*outputImage.width; ++i)
+    for (int i = 0; i < outputImage.height * outputImage.width; ++i)
         plane[i] = 0x00;
 
    
@@ -84,9 +84,9 @@ int DrawInverseIteration ()
         InverseIterate(z, 0);
     }
     
-    for (y = 0; y < outputImage.height; y++){
-        for (x = 0; x < 3 * outputImage.width; x+=3){
-            if (plane[y*outputImage.width + x/3] > fractal.iterations/2)
+    for (y = 0; y < outputImage.height; ++y) {
+        for (x = 0; x < 3 * outputImage.width; x += 3) {
+            if (plane[y * outputImage.width + x / 3] > fractal.iterations / 2)
                 color = mainPalette.insideColor;
             else
                 color = mainPalette.palette[0];

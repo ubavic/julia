@@ -10,11 +10,11 @@ extern struct BMPImage outputImage;
 extern struct PPMImage inputImage;
 extern struct Fractal fractal;
 
-int DrawEscapeTime ()
+int DrawEscapeTime()
 {
 
     fractal.orbit = (complex *) malloc(fractal.iterations*sizeof(complex));
-    if (fractal.orbit == NULL){
+    if (fractal.orbit == NULL) {
         perror("The following error occurred:");
         return 1;
     }
@@ -23,7 +23,7 @@ int DrawEscapeTime ()
     void (*GetOutsideColor)(unsigned int, struct Color *);
     void (*GetInsideColor)(unsigned int, struct Color *);
 
-    switch(fractal.renderOutside){
+    switch(fractal.renderOutside) {
         case 0:
             GetOutsideColor = &GetOutside;
             break;
@@ -80,7 +80,7 @@ int DrawEscapeTime ()
             break;  
     }
 
-    switch(fractal.renderInside){
+    switch(fractal.renderInside) {
         case 0:
             GetInsideColor = &GetInside;
             break;
@@ -110,7 +110,7 @@ int DrawEscapeTime ()
             break;
     }
 
-    switch (fractal.type){
+    switch (fractal.type) {
         case 0:
             FractalAlgorithm = &Mandelbrot;
             break;
@@ -130,13 +130,13 @@ int DrawEscapeTime ()
     z.im = fractal.origin.im;
     struct Color color;
 
-    for (y = 0; y < outputImage.height; y++){
+    for (y = 0; y < outputImage.height; ++y) {
         z.re = fractal.origin.re;
 
-        for (x = 0; x < 3 * outputImage.width; x+=3){
+        for (x = 0; x < 3 * outputImage.width; x += 3) {
             fractal.orbit[0] = z;
 
-            for (i = 1; i < fractal.iterations; i++){
+            for (i = 1; i < fractal.iterations; ++i) {
                 if (fractal.julia)
                     fractal.orbit[i] = FractalAlgorithm (fractal.constant, fractal.orbit[i-1]);
                 else
@@ -153,29 +153,29 @@ int DrawEscapeTime ()
             else
                 GetOutsideColor (i, &color);
 
-            outputImage.row[x] = color.b;
-            outputImage.row[x+1] = color.g;
-            outputImage.row[x+2] = color.r;
+            outputImage.row[x]     = color.b;
+            outputImage.row[x + 1] = color.g;
+            outputImage.row[x + 2] = color.r;
 
-            z.re+=fractal.delta;
+            z.re += fractal.delta;
         }
 
         WriteRowToBMPImage(&outputImage);
-        z.im+=fractal.delta;
+        z.im += fractal.delta;
     }
 
     return 0;
 }
 
-complex Mandelbrot (complex z, complex w)
+complex Mandelbrot(complex z, complex w)
 {
-    double tmp = w.re*w.re - w.im*w.im + z.re;
-    w.im = 2*w.re*w.im + z.im;
+    double tmp = w.re * w.re - w.im * w.im + z.re;
+    w.im = 2* w.re * w.im + z.im;
     w.re = tmp;
     return w;
 }
 
-complex Multibrot (complex z, complex w)
+complex Multibrot(complex z, complex w)
 {
     double tmp1, tmp2;
     tmp1 = w.re * w.re + w.im * w.im;
@@ -187,7 +187,7 @@ complex Multibrot (complex z, complex w)
     return w;
 }
 
-complex Mandelbar (complex z, complex w)
+complex Mandelbar(complex z, complex w)
 {
     double tmp = w.re * w.re - w.im * w.im + z.re;
     w.im = -2 * w.re * w.im + z.im;
@@ -195,7 +195,7 @@ complex Mandelbar (complex z, complex w)
     return w;
 }
 
-complex Ship (complex z, complex w)
+complex Ship(complex z, complex w)
 {
     w.re = fabs(w.re);
     w.im = fabs(w.im);

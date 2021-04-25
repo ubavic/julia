@@ -25,7 +25,7 @@ double sigmoid3(double x)
     return 2/PI*atan(pow(x+0.5,10));
 }
 
-complex Add (complex a, complex b)
+complex Add(complex a, complex b)
 {
     complex sum;
     sum.re = a.re + b.re;
@@ -33,7 +33,7 @@ complex Add (complex a, complex b)
     return sum;
 }
 
-complex Sub (complex a, complex b)
+complex Sub(complex a, complex b)
 {
     complex c;
     c.re = a.re - b.re;
@@ -41,23 +41,23 @@ complex Sub (complex a, complex b)
     return c;
 }
 
-complex Mul (complex a, complex b)
+complex Mul(complex a, complex b)
 {
     complex c;
-    c.re = a.re*b.re - a.im*b.im;
-    c.im = a.re*b.im + a.im*b.re;
+    c.re = a.re * b.re - a.im * b.im;
+    c.im = a.re * b.im + a.im * b.re;
     return c;
 }
 
-complex Div (complex a, complex b)
+complex Div(complex a, complex b)
 {
     complex c;
-    c.re = (a.re*b.re + a.im*b.im)/(b.re * b.re + b.im * b.im);
-    c.im = (a.im*b.re - a.re*b.im)/(b.re * b.re + b.im * b.im);
+    c.re = (a.re * b.re + a.im * b.im)/(b.re * b.re + b.im * b.im);
+    c.im = (a.im * b.re - a.re * b.im)/(b.re * b.re + b.im * b.im);
     return c;
 }
 
-complex Con (complex a)
+complex Con(complex a)
 {
     complex c;
     c.re = a.re;
@@ -65,17 +65,17 @@ complex Con (complex a)
     return c;
 }
 
-double NormSq (complex a)
+double NormSq(complex a)
 {
     return a.re * a.re + a.im * a.im;
 }
 
-double Norm (complex a)
+double Norm(complex a)
 {
     return sqrt(a.re * a.re + a.im * a.im);
 }
 
-complex RealExp (complex a, double exponent)
+complex RealExp(complex a, double exponent)
 {
     complex c;
     double tmp1 = pow(a.re * a.re + a.im * a.im, exponent/2);
@@ -85,7 +85,7 @@ complex RealExp (complex a, double exponent)
     return c;
 }
 
-void Print (complex a)
+void Print(complex a)
 {
     printf("%+f%+fi\n", a.re, a.im);
 }

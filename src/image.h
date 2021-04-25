@@ -3,14 +3,14 @@
 
 #include "global.h"
 
-int OpenBMPImage (struct BMPImage*);
+int OpenBMPImage(struct BMPImage*);
 
-void WriteRowToBMPImage (struct BMPImage*);
+void WriteRowToBMPImage(struct BMPImage*);
 
-int CloseBMPImage (struct BMPImage*);
+int CloseBMPImage(struct BMPImage*);
 
-int LoadPPMImage (struct PPMImage*);
+int LoadPPMImage(struct PPMImage*);
 
-int GetPixelFromPoint (complex);
+int GetPixelFromPoint(complex);
 
 #endif

@@ -11,31 +11,31 @@ extern struct BMPImage outputImage;
 extern struct Palette mainPalette;
 extern struct Fractal fractal;
 
-int main (int argc, char** argv)
+int main(int argc, char** argv)
 {
-    SetDefaults ();
+    SetDefaults();
 
-    switch (Parse (argc, argv)){
-	case 1:
-		return 1;
-	case 2:
-		return 0;
+    switch (Parse(argc, argv)) {
+        case 1:
+            return 1;
+        case 2:
+            return 0;
     }
 
-    if (SetImageFractal ())
+    if (SetImageFractal())
         return 1;
 
-    if (OpenBMPImage (&outputImage))
+    if (OpenBMPImage(&outputImage))
         return 1;
 
     if (fractal.algorithm == 0)
-        DrawEscapeTime ();
+        DrawEscapeTime();
     else if (fractal.algorithm == 1)
-        DrawInverseIteration ();
+        DrawInverseIteration();
     else if (fractal.algorithm == 2)
-        DrawBudhabrot ();
+        DrawBudhabrot();
 
-    if (CloseBMPImage (&outputImage))
+    if (CloseBMPImage(&outputImage))
         return 1;
 
     printf ("Done!\n");
@@ -44,39 +44,39 @@ int main (int argc, char** argv)
 }
 
 
-int SetImageFractal ()
+int SetImageFractal()
 {
-    printf ("Calculating ");
+    printf("Calculating ");
 
     if(fractal.julia)
-        printf ("Julia set of ");
+        printf("Julia set of ");
 
     if (fractal.type == 0)
-        printf ("Mandelbrot set");
+        printf("Mandelbrot set");
     else if (fractal.type == 1)
-        printf ("Multibrot set (exponent = %f)", fractal.exponent);
+        printf("Multibrot set (exponent = %f)", fractal.exponent);
     else if (fractal.type == 2)
-        printf ("Mandelbar set");
+        printf("Mandelbar set");
     else if (fractal.type == 3)
-        printf ("Burning ship");
+        printf("Burning ship");
 
-    printf (", with algorithm (%d).\n", fractal.algorithm);
-    printf ("Coloring: %d:%d.\n", fractal.renderOutside, fractal.renderInside);
-    printf ("Max. iterations: %d;\n", fractal.iterations);
-    printf ("Center is at %f + %fi, and zoom factor is %f.\n", fractal.origin.re, fractal.origin.im, fractal.zoom);
-    printf ("Saving to %dpx by %dpx image \"%s\".\n", outputImage.width, outputImage.height, outputImage.fileName);
+    printf(", with algorithm (%d).\n", fractal.algorithm);
+    printf("Coloring: %d:%d.\n", fractal.renderOutside, fractal.renderInside);
+    printf("Max. iterations: %d;\n", fractal.iterations);
+    printf("Center is at %f + %fi, and zoom factor is %f.\n", fractal.origin.re, fractal.origin.im, fractal.zoom);
+    printf("Saving to %dpx by %dpx image \"%s\".\n", outputImage.width, outputImage.height, outputImage.fileName);
 
     fractal.zoom = 2 / fractal.zoom;
 
-    if (outputImage.width >= outputImage.height){
+    if (outputImage.width >= outputImage.height) {
         fractal.origin.im -= fractal.zoom;
-        fractal.zoom+=fractal.zoom;
-        fractal.delta=fractal.zoom/outputImage.height;
+        fractal.zoom += fractal.zoom;
+        fractal.delta = fractal.zoom / outputImage.height;
         fractal.origin.re = fractal.origin.re - (fractal.delta * outputImage.width) / 2;
     } else {
         fractal.origin.re -= fractal.zoom;
-        fractal.zoom+=fractal.zoom;
-        fractal.delta=fractal.zoom/outputImage.width;
+        fractal.zoom += fractal.zoom;
+        fractal.delta = fractal.zoom/outputImage.width;
         fractal.origin.im = fractal.origin.im - (fractal.delta * outputImage.height) / 2;
     }
 

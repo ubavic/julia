@@ -3,12 +3,12 @@
 
 #include "global.h"
 
-complex ReturnInverseImage (complex w, int i);
+complex ReturnInverseImage(complex w, int i);
 
-int InverseImage (complex);
+int InverseImage(complex);
 
-void InverseIterate (complex, int);
+void InverseIterate(complex, int);
 
-int DrawInverseIteration ();
+int DrawInverseIteration();
 
 #endif
