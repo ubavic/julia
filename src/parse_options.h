@@ -62,21 +62,21 @@
     "./julia -f 0 -c 0.2:-0.5 -d 2000:2000 -z 3.0 -r 2 -p palette2\n"
 
 static struct option long_options[] ={
-    {"algorithm",   required_argument,  0,      'a'},
-    {"bailout",     required_argument,  0,      'b'},
-    {"center",      required_argument,  0,      'c'},
-    {"dimensions",  required_argument,  0,      'd'},
-    {"exponent",    required_argument,  0,      'e'},
-    {"fractal",     required_argument,  0,      'f'},
-    {"help",        no_argument,        0,      'h'},
-    {"iterations",  required_argument,  0,      'i'},
-    {"julia",       required_argument,  0,      'j'},
-    {"kappa",       required_argument,  0,      'k'},
-    {"load",        required_argument,  0,      'l'},
-    {"output",      required_argument,  0,      'o'},
-    {"palette",     required_argument,  0,      'p'},
-    {"render",      required_argument,  0,      'r'},
-    {"zoom",        required_argument,  0,      'z'},
+    {"algorithm",  required_argument, 0, 'a'},
+    {"bailout",    required_argument, 0, 'b'},
+    {"center",     required_argument, 0, 'c'},
+    {"dimensions", required_argument, 0, 'd'},
+    {"exponent",   required_argument, 0, 'e'},
+    {"fractal",    required_argument, 0, 'f'},
+    {"help",       no_argument,       0, 'h'},
+    {"iterations", required_argument, 0, 'i'},
+    {"julia",      required_argument, 0, 'j'},
+    {"kappa",      required_argument, 0, 'k'},
+    {"load",       required_argument, 0, 'l'},
+    {"output",     required_argument, 0, 'o'},
+    {"palette",    required_argument, 0, 'p'},
+    {"render",     required_argument, 0, 'r'},
+    {"zoom",       required_argument, 0, 'z'},
     {0, 0, 0, 0}
 };
 

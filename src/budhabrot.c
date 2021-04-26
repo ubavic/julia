@@ -21,7 +21,7 @@ unsigned int findCycle(unsigned int iterations)
 
 int DrawBudhabrot()
 {
-    complex z, w;
+    complex z;
     unsigned int i, max, x, y, point;
 
     complex (*FractalAlgorithm)(complex, complex);
@@ -49,7 +49,7 @@ int DrawBudhabrot()
         return 1;
     }
 
-    for (i = 0; i < outputImage.height*outputImage.width; ++i)
+    for (i = 0; i < outputImage.height * outputImage.width; ++i)
         plane[i] = 0x00;
 
     fractal.orbit = (complex *) malloc(fractal.iterations * sizeof(complex));
@@ -73,7 +73,7 @@ int DrawBudhabrot()
         }
 
         if (i < fractal.iterations - 5) {
-            for (y = 0; y < i; y++) {
+            for (y = 0; y < i; ++y) {
                 x = GetPixelFromPoint(fractal.orbit[y]);
                 if (x != -1)
                         ++plane[x];
@@ -82,16 +82,16 @@ int DrawBudhabrot()
     }
     
     max = 1;
-    for (i = 0; i < outputImage.height*outputImage.width; ++i)
+    for (i = 0; i < outputImage.height * outputImage.width; ++i)
         max = max > plane[i] ? max : plane[i];
 
     printf("%d\n", max);
 
     for (y = 0; y < outputImage.height; ++y) {
         for (x = 0; x < outputImage.width; ++x) {
-            outputImage.row[3*x] =     0xFF * plane[y * outputImage.width + x] / max;
-            outputImage.row[3*x + 1] = 0xFF * plane[y * outputImage.width + x] / max;
-            outputImage.row[3*x + 2] = 0xFF * plane[y * outputImage.width + x] / max;
+            outputImage.row[3 * x] =     0xFF * plane[y * outputImage.width + x] / max;
+            outputImage.row[3 * x + 1] = 0xFF * plane[y * outputImage.width + x] / max;
+            outputImage.row[3 * x + 2] = 0xFF * plane[y * outputImage.width + x] / max;
         }
         WriteRowToBMPImage(&outputImage);
     }

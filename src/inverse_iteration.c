@@ -74,11 +74,11 @@ int DrawInverseIteration ()
         return 1;
     }
 
-    for (int i = 0; i < outputImage.height * outputImage.width; ++i)
+    for (i = 0; i < outputImage.height * outputImage.width; ++i)
         plane[i] = 0x00;
 
    
-    for (int i = 0; i < fractal.kappa; ++i) {
+    for (i = 0; i < fractal.kappa; ++i) {
         z.re = -2+4*getRandom();
         z.im = -2+4*getRandom();
         InverseIterate(z, 0);

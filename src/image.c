@@ -97,7 +97,7 @@ int LoadPPMImage (struct PPMImage* image)
 {
     unsigned char* string = (unsigned char *) malloc(12 * sizeof(unsigned char));
     unsigned char c;
-    int i, j;
+    int i;
 
     image->imageFile = fopen(image->fileName, "r+");
 
@@ -106,14 +106,16 @@ int LoadPPMImage (struct PPMImage* image)
         return 1;
     }
 
-    for (i=0; i<12; ++i)
+    for (i = 0; i < 12; ++i)
         string[i] = 0;
 
-    i=0;
+    i = 0;
+
     do {
         fscanf(image->imageFile, "%c", &c);
         string[i++] = c;
     } while (c != 0x0a && c != 0x20);
+
     string[i-1] = 0;
 
     if (strcmp(string, "P6")) {
@@ -147,9 +149,9 @@ int LoadPPMImage (struct PPMImage* image)
 
     while (fgetc(image->imageFile) != '\n') ;
 
-    image->data = (unsigned char*) malloc (3 * image->width * image->height *  sizeof(unsigned char));
+    image->data = (unsigned char*) malloc (3 * image->width * image->height * sizeof(unsigned char));
 
-    if(fread(image->data, 3 * image->width,  image->height, image->imageFile) != image->height) {
+    if(fread(image->data, 3 * image->width, image->height, image->imageFile) != image->height) {
         fprintf(stderr, "Error loading image '%s'\n", image->fileName);
         return 1;
     }

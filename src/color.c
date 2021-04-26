@@ -33,7 +33,7 @@ void ContinuousColor(unsigned int i, struct Color* color)
     int clr1, clr2;
     double t1, t2, mu;
 
-    mu = i - (fractal.rho - fractal.radius)/(pow(fractal.radius, fractal.exponent) - fractal.radius);
+    mu = i - (fractal.rho - fractal.radius) / (pow(fractal.radius, fractal.exponent) - fractal.radius);
 
     clr1 = (int) mu;
     t2 = mu - clr1;
@@ -51,7 +51,7 @@ void SmoothColor(unsigned int i, struct Color* color)
     int clr1, clr2;
     double t1, t2, mu;
 
-    mu = i + 2 - log(log(sqrt(fractal.rho)))/log(fractal.exponent);
+    mu = i + 2 - log(log(sqrt(fractal.rho))) / log(fractal.exponent);
     clr1 = (int) mu;
     t2 = mu - clr1;
     t1 = 1 - t2;
@@ -90,7 +90,6 @@ void GridColor(unsigned int i, struct Color* color)
 {
     i--;
     double angle = atan2(fractal.orbit[i].im, fractal.orbit[i].re) * IPI + 0.5;
-    double mu = i + 1 - log(log(sqrt(fractal.rho))) / log(fractal.exponent);
     double ro = (fractal.rho - fractal.radius) / (pow(fractal.radius, fractal.exponent) - fractal.radius);
     int m = ro < 0.80 ? 1 : 0;
     int a = angle > (0.495 - ro * 0.005) && angle < (0.505 + ro * 0.005) ? 0 : 1;
@@ -102,19 +101,23 @@ void GridColor(unsigned int i, struct Color* color)
 
 void GridImage(unsigned int i, struct Color* color)
 {
-    i--;
-    double angle = atan2(fractal.orbit[i].im, fractal.orbit[i].re) / PI + 1;
-    //double ro = 2 - log(0.5*(log(fractal.rho) - fractal.exponent));
-    double ro = log(log(sqrt(fractal.rho)) / log(sqrt(fractal.radius))) / log(fractal.exponent);
-    int m = ro < 1 && ro > 0 ? 1 : 0;
+    int m, j, k;
+    double angle, ro;
+
+    --i;
+    angle = atan2(fractal.orbit[i].im, fractal.orbit[i].re) / PI + 1;
+    /* double ro = 2 - log(0.5*(log(fractal.rho) - fractal.exponent)); */
+    ro = log(log(sqrt(fractal.rho)) / log(sqrt(fractal.radius))) / log(fractal.exponent);
+    m = ro < 1 && ro > 0 ? 1 : 0;
 
     if (angle > 1)
-        angle--;
+        --angle;
 
     if (m) {
-        int j = ro * inputImage.height;
-        int k = angle * inputImage.width;
+        j = ro * inputImage.height;
+        k = angle * inputImage.width;
         i = 3 * (int)(j * (inputImage.width) + k);
+
         color->r = inputImage.data[i];
         color->g = inputImage.data[i+1];
         color->b = inputImage.data[i+2];
@@ -169,10 +172,12 @@ void SpeedColor(unsigned int i, struct Color* color)
 
 void GreenColor(unsigned int i, struct Color* color)
 {
-    double mu = i - log(log(fractal.rho)/2)/log(fractal.exponent);
-    double t1 = 2*atan(mu)/PI;
+    double mu, t1, t2;
+
+    mu = i - log(log(fractal.rho)/2)/log(fractal.exponent);
+    t1 = 2*atan(mu)/PI;
     t1 = t1 * t1;
-    double t2 = 1 - t1;
+    t2 = 1 - t1;
 
     color->r = mainPalette.palette[0].r * t2 + mainPalette.palette[1].r * t1;
     color->g = mainPalette.palette[0].g * t2 + mainPalette.palette[1].g * t1;
@@ -181,14 +186,16 @@ void GreenColor(unsigned int i, struct Color* color)
 
 void DistanceColor(unsigned int i, struct Color* color)
 {
+    int j;
+    double t1, t2;
     complex dz = O;
 
-    for (int j = 0; j < i; j++)
+    for (j = 0; j < i; ++j)
         dz = Add(Mul((complex){.re=fractal.exponent, .im=0}, Mul(dz, fractal.orbit[j])), (complex){.re=1, .im=0});
 
-    double t1 = sqrt(NormSq(fractal.orbit[i])/ NormSq(dz)) * log(sqrt(NormSq(fractal.orbit[i]))) ;
+    t1 = sqrt(NormSq(fractal.orbit[i])/ NormSq(dz)) * log(sqrt(NormSq(fractal.orbit[i]))) ;
     t1 = 2 * atan(t1) / PI;
-    double t2 = 1 - t1;
+    t2 = 1 - t1;
 
     color->r = mainPalette.palette[0].r * t2 + mainPalette.palette[1].r * t1;
     color->g = mainPalette.palette[0].g * t2 + mainPalette.palette[1].g * t1;
@@ -197,45 +204,46 @@ void DistanceColor(unsigned int i, struct Color* color)
 
 void BotcherCoordinatesColor(unsigned int i, struct Color* color)
 {
-    int a = 0;
+    int angle, ro, j;
 
     complex phi = fractal.orbit[0];
     complex mul;
 
-    for (int j = 0; j < i; j++) {
+    for (j = 0; j < i; ++j) {
         mul = Mul(fractal.orbit[j],fractal.orbit[j]);
         mul = Add((complex){.re=1, .im=0}, Div(fractal.constant, mul));
         mul = RealExp(mul, pow(0.5, j+1));
         phi = Mul(phi, mul);
     }
 
-    int angle = floor(64 * (atan2(phi.im, phi.re) + PI) / (2 * PI));
-    int ro = 8 * log(Norm(phi));
+    angle = floor(64 * (atan2(phi.im, phi.re) + PI) / (2 * PI));
+    ro = 8 * log(Norm(phi));
 
     *color = mainPalette.palette[(angle + ro) % mainPalette.colors];
 }
 
 void BotcherImageColor(unsigned int i, struct Color* color)
 {
-    int a = 0;
+    int j, k;
+    double angle, ro;
 
     complex phi = fractal.orbit[0];
     complex mul;
 
-    for (int j = 0; j < i; j++) {
+    for (j = 0; j < i; ++j) {
         mul = Mul(fractal.orbit[j], fractal.orbit[j]);
         mul = Add((complex){.re=1, .im=0}, Div(fractal.constant, mul));
         mul = RealExp(mul, pow(0.5, j + 1));
         phi = Mul(phi, mul);
     }
 
-    double angle = (32 * (atan2(phi.im, phi.re) + PI)) / (2 * PI);
+    angle = (32 * (atan2(phi.im, phi.re) + PI)) / (2 * PI);
     angle = angle - floor(angle);
-    double ro = 6 * log(Norm(phi));
+    ro = 6 * log(Norm(phi));
     ro = ro - floor(ro);
 
-    int j = ro * inputImage.height;
-    int k = angle * inputImage.width;
+    j = ro * inputImage.height;
+    k = angle * inputImage.width;
     i = 3 * (int) (j * inputImage.width + k);
     color->r = inputImage.data[i];
     color->g = inputImage.data[i + 1];
@@ -273,9 +281,8 @@ void HSVtoRGB(double H, double S, double V, struct Color* color)
 void AvergePalette(struct Color* palette, int n, struct Color* color) 
 {
     int r = 0, g = 0, b = 0;
-    int i;
 
-    for (i = 0; i < n; i++) {
+    for (int i = 0; i < n; ++i) {
         r += palette[i].r;
         g += palette[i].g;
         b += palette[i].b;
@@ -345,7 +352,7 @@ int LoadPalete(char* fileName)
         mainPalette.palette[mainPalette.colors].r = n >> 16;
         mainPalette.palette[mainPalette.colors].g = n >> 8 & 0xFF;
         mainPalette.palette[mainPalette.colors].b = n & 0xFF;
-        mainPalette.colors++;
+        ++mainPalette.colors;
     }
     
     AvergePalette(mainPalette.palette, mainPalette.colors, &mainPalette.avergeColor);

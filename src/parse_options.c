@@ -37,7 +37,7 @@ int Parse(int argc, char** argv)
             case 'a':
                 sscanf(optarg, "%u", &fractal.algorithm);
                 if (fractal.type > 2) {
-                    strcat(strBuffer,  "Algorithm can be 0, 1 or 2. Using default value (0).\n");
+                    strcat(strBuffer, "Algorithm can be 0, 1 or 2. Using default value (0).\n");
                     fractal.type = 0;
                 }
                 break;
@@ -103,7 +103,7 @@ int Parse(int argc, char** argv)
             case 'z':
                 sscanf(optarg, "%lf", &fractal.zoom);
                 if (fractal.zoom < 0) {
-                    strcat(strBuffer,  "The zoom factor must be bigger than 0. Using the default value (1).\n");
+                    strcat(strBuffer, "The zoom factor must be bigger than 0. Using the default value (1).\n");
                     fractal.zoom = 1.0;
                 }
                 break;
