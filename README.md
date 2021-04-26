@@ -1,12 +1,12 @@
 # Julia
 
-Julia is a simple fractal generator written in C.
+Julia is a simple fractal generator written in C. It can draw [Julia set](https://en.wikipedia.org/wiki/Julia_set) and [Mandelbrot set](https://en.wikipedia.org/wiki/Mandelbrot_set) with many different coloring algorithms.
 
 <img src="img/julia.png" alt="Julia set" title="Julia set">
 
 ## Building
 
-Just run `make` inside the `src` folder. The program should compile on Linux, Windows, and Mac without problems. The only dependency of this program is the getopt library.
+Run `make` inside the repository. The program should compile on Linux without any problems (probably on Windows and Mac too). The only dependency of this program is the `getopt` library.
 
 ## Usage
 
@@ -58,6 +58,8 @@ Parameter `OUTSIDE` can be one of the following numbers (only for the escape tim
   9. Green function coloring
   10. Botcher function coloring
   11. Botcher image coloring (PPM image must be loaded with the `-l` option)
+
+Most of given types of outside coloring work properly only if `BAILOUT` is set to large number (>10<sup>3</sup>).
 
 Parameter `INSIDE` can be one of the following numbers (only for the escape time algorithm):
 
